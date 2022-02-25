@@ -616,7 +616,7 @@ public class ChangeSet implements Conditional, ChangeLogChild {
                     }
                 }
 
-                if (runInTransaction) {
+                if (!database.supportsDDLInTransaction() && runInTransaction) {
                     database.commit();
                 }
                 log.info(LogType.LOG, "ChangeSet " + toString(false) + " ran successfully in " + (new Date().getTime() - startTime + "ms"));
